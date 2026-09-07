@@ -28,6 +28,7 @@ import { PatientMedicalRecords } from '@/components/portal/PatientMedicalRecords
 import { PatientChat } from '@/components/portal/PatientChat';
 import { PatientReviews } from '@/components/portal/PatientReviews';
 import { PatientXrays } from '@/components/portal/PatientXrays';
+import { PatientTreatmentReports } from '@/components/portal/PatientTreatmentReports';
  
  interface DoctorInfo {
    id: string;
@@ -86,6 +87,9 @@ const PatientPortal = () => {
 
   // Booking modal state
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
+
+  // Live refresh key: bumped whenever the patient's records change
+  const [liveKey, setLiveKey] = useState(0);
  
    // Doctor filter state
    const [doctors, setDoctors] = useState<DoctorInfo[]>([]);
@@ -128,6 +132,31 @@ const PatientPortal = () => {
       fetchAppointments();
        fetchDoctors();
     }
+  }, [user?.email]);
+
+  // Realtime auto-refresh of the patient's record
+  useEffect(() => {
+    if (!user?.email) return;
+    const email = user.email;
+    const tables = ['appointments', 'invoices', 'prescriptions', 'treatment_plans', 'treatment_reports'];
+    const channel = supabase.channel(`patient-record-${email}`);
+
+    tables.forEach((table) => {
+      channel.on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table, filter: `patient_email=eq.${email}` },
+        () => {
+          if (table === 'appointments') fetchAppointments();
+          setLiveKey((k) => k + 1);
+        }
+      );
+    });
+
+    channel.subscribe();
+    return () => {
+      supabase.removeChannel(channel);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.email]);
  
    const fetchDoctors = async () => {
@@ -347,7 +376,7 @@ const PatientPortal = () => {
 
       <main className="container mx-auto px-4 py-8">
         {/* Dashboard Stats */}
-        <PatientDashboard userEmail={user.email || ''} />
+        <PatientDashboard key={`dash-${liveKey}`} userEmail={user.email || ''} />
 
         <Tabs defaultValue="appointments" dir={isRTL ? 'rtl' : 'ltr'}>
           <TabsList className="grid w-full grid-cols-9 mb-6">
@@ -556,20 +585,21 @@ const PatientPortal = () => {
         )}
           </TabsContent>
 
-          <TabsContent value="medical">
-            {user?.email && <PatientMedicalRecords userEmail={user.email} />}
+          <TabsContent value="medical" className="space-y-6">
+            {user?.email && <PatientMedicalRecords key={`mr-${liveKey}`} userEmail={user.email} />}
+            {user?.email && <PatientTreatmentReports key={`tr-${liveKey}`} userEmail={user.email} />}
           </TabsContent>
 
           <TabsContent value="treatments">
-            {user?.email && <PatientTreatmentPlans userEmail={user.email} />}
+            {user?.email && <PatientTreatmentPlans key={`tp-${liveKey}`} userEmail={user.email} />}
           </TabsContent>
 
           <TabsContent value="invoices">
-            {user?.email && <PatientInvoices userEmail={user.email} />}
+            {user?.email && <PatientInvoices key={`inv-${liveKey}`} userEmail={user.email} />}
           </TabsContent>
 
           <TabsContent value="prescriptions">
-            {user?.email && <PatientPrescriptions userEmail={user.email} />}
+            {user?.email && <PatientPrescriptions key={`rx-${liveKey}`} userEmail={user.email} />}
           </TabsContent>
 
           <TabsContent value="xrays">
