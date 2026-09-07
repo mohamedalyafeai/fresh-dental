@@ -8,6 +8,7 @@ import MedicalRecordsManager from '@/components/admin/MedicalRecordsManager';
 import InventoryManager from '@/components/admin/InventoryManager';
 import XrayManager from '@/components/admin/XrayManager';
 import AdminChat from '@/components/admin/AdminChat';
+import { DoctorWorkspace } from '@/components/admin/DoctorWorkspace';
 import { patientNoteSchema } from '@/lib/validation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -1245,6 +1246,10 @@ const AdminDashboard = () => {
               <MessageSquare className="h-4 w-4 ml-2" />
               الدردشة
             </TabsTrigger>
+            <TabsTrigger value="doctor" className="rounded-xl data-[state=active]:bg-primary data-[state=active]:text-primary-foreground px-6">
+              <Stethoscope className="h-4 w-4 ml-2" />
+              واجهة الطبيب
+            </TabsTrigger>
             <TabsTrigger value="settings" className="rounded-xl data-[state=active]:bg-primary data-[state=active]:text-primary-foreground px-6">
               <Settings className="h-4 w-4 ml-2" />
               الإعدادات
@@ -1715,6 +1720,11 @@ const AdminDashboard = () => {
           {/* Chat Tab */}
           <TabsContent value="chat" className="space-y-6">
             <AdminChat />
+          </TabsContent>
+
+          {/* Doctor Workspace Tab */}
+          <TabsContent value="doctor" className="space-y-6">
+            <DoctorWorkspace />
           </TabsContent>
 
           {/* Settings Tab */}
