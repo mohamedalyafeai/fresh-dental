@@ -1099,6 +1099,10 @@ const AdminDashboard = () => {
             </div>
           </div>
           <div className="flex items-center gap-3 flex-wrap">
+            <Button variant="outline" onClick={() => navigate('/admin/doctor')} className="rounded-xl">
+              <Stethoscope className="h-4 w-4 ml-2" />
+              صفحة الطبيب
+            </Button>
             <Button variant="outline" onClick={() => navigate('/admin/dental-chart')} className="rounded-xl">
               <Sparkles className="h-4 w-4 ml-2" />
               مخطط الأسنان
