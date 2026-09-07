@@ -16,6 +16,7 @@ const PatientPortal = lazy(() => import("./pages/PatientPortal"));
 const StaffManagement = lazy(() => import("./pages/StaffManagement"));
 const DoctorProfile = lazy(() => import("./pages/DoctorProfile"));
 const DoctorSchedule = lazy(() => import("./pages/DoctorSchedule"));
+const DoctorWorkspacePage = lazy(() => import("./pages/DoctorWorkspacePage"));
 const Settings = lazy(() => import("./pages/Settings"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const DentalChartPage = lazy(() => import("./pages/DentalChartPage"));
@@ -48,6 +49,7 @@ const App = () => (
                 <Route path="/admin/staff" element={<StaffManagement />} />
                 <Route path="/admin/profile" element={<DoctorProfile />} />
                 <Route path="/admin/schedule" element={<DoctorSchedule />} />
+                <Route path="/admin/doctor" element={<DoctorWorkspacePage />} />
                 <Route path="/admin/dental-chart" element={<DentalChartPage />} />
                 <Route path="/admin/treatment-plans" element={<TreatmentPlansPage />} />
                 <Route path="/admin/invoices" element={<InvoicesPage />} />
