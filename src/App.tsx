@@ -16,6 +16,7 @@ const PatientPortal = lazy(() => import("./pages/PatientPortal"));
 const StaffManagement = lazy(() => import("./pages/StaffManagement"));
 const DoctorProfile = lazy(() => import("./pages/DoctorProfile"));
 const DoctorSchedule = lazy(() => import("./pages/DoctorSchedule"));
+const DoctorWorkspacePage = lazy(() => import("./pages/DoctorWorkspacePage"));
 const Settings = lazy(() => import("./pages/Settings"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const DentalChartPage = lazy(() => import("./pages/DentalChartPage"));
