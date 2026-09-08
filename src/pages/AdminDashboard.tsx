@@ -1250,9 +1250,9 @@ const AdminDashboard = () => {
               <MessageSquare className="h-4 w-4 ml-2" />
               الدردشة
             </TabsTrigger>
-            <TabsTrigger value="doctor" className="rounded-xl data-[state=active]:bg-primary data-[state=active]:text-primary-foreground px-6">
-              <Stethoscope className="h-4 w-4 ml-2" />
-              واجهة الطبيب
+            <TabsTrigger value="calendar" className="rounded-xl data-[state=active]:bg-primary data-[state=active]:text-primary-foreground px-6">
+              <CalendarDays className="h-4 w-4 ml-2" />
+              التقويم
             </TabsTrigger>
             <TabsTrigger value="settings" className="rounded-xl data-[state=active]:bg-primary data-[state=active]:text-primary-foreground px-6">
               <Settings className="h-4 w-4 ml-2" />
