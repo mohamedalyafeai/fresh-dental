@@ -8,7 +8,7 @@ import MedicalRecordsManager from '@/components/admin/MedicalRecordsManager';
 import InventoryManager from '@/components/admin/InventoryManager';
 import XrayManager from '@/components/admin/XrayManager';
 import AdminChat from '@/components/admin/AdminChat';
-import { DoctorWorkspace } from '@/components/admin/DoctorWorkspace';
+import { AppointmentsCalendar } from '@/components/admin/AppointmentsCalendar';
 import { patientNoteSchema } from '@/lib/validation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
