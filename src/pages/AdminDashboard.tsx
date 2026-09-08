@@ -1726,9 +1726,9 @@ const AdminDashboard = () => {
             <AdminChat />
           </TabsContent>
 
-          {/* Doctor Workspace Tab */}
-          <TabsContent value="doctor" className="space-y-6">
-            <DoctorWorkspace />
+          {/* Calendar Tab */}
+          <TabsContent value="calendar" className="space-y-6">
+            <AppointmentsCalendar appointments={appointments} />
           </TabsContent>
 
           {/* Settings Tab */}
